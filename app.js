@@ -11,17 +11,21 @@ const compression = require('compression');
 const cors = require('cors');
 const AppError = require('./utils/appError');
 const globalErrorHandler = require('./controllers/errorController');
-const authRouter= require('./routes/authRouter')
-const userRouter= require('./routes/userRouter')
+const authRouter = require('./routes/authRouter')
+const userRouter = require('./routes/userRouter')
 
 const app = express();
 
+// ⭐ ضروري مع Vercel
+app.set("trust proxy", 1);
+
+
 // 🔹 Security Middleware
- app.use(cors());
+app.use(cors());
 // Access-Control-Allow-Origin *
 // api.natours.com, front-end natours.com
 // app.use(cors({
-  // origin: 'https://fluxstore-eight.vercel.app/'
+// origin: 'https://fluxstore-eight.vercel.app/'
 // }))
 
 app.options('*', cors());
@@ -36,7 +40,7 @@ app.use(helmet());
 
 // 🔹 Logging (Only in Development Mode)
 if (process.env.NODE_ENV === 'development') {
-   app.use(morgan('dev'));
+  app.use(morgan('dev'));
 }
 
 // 🔹 Rate Limiting
