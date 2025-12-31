@@ -1,2 +1,0 @@
-# Flux-Store
-Ecommerce App
