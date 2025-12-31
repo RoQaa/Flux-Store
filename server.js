@@ -15,7 +15,7 @@ process.on("uncaughtException", (err) => {
 dotenv.config({ path: `${__dirname}/config.env` });
 
 // Connect to MongoDB
-const DB = process.env.DATABASE.replace('<db_password>',process.env.PASSWORD);
+const DB = process.env.DATABASE.replace('<db_password>', process.env.PASSWORD);
 mongoose.set("strictQuery", true);
 mongoose
   .connect(DB)
@@ -24,13 +24,14 @@ mongoose
   });
 
 // Create HTTP server
-const server = http.createServer(app);
+if (process.env.NODE_ENV === "development") {
+  const server = http.createServer(app);
 
-const port = process.env.PORT || 5000;
-server.listen(port, () => {
-  console.log(`🚀 Server running on port ${port}`);
-});
-
+  const port = process.env.PORT || 5000;
+  server.listen(port, () => {
+    console.log(`🚀 Server running on port ${port}`);
+  });
+}
 // Handle unhandled promise rejections
 process.on("unhandledRejection", (err) => {
   console.log("UNHANDLED REJECTION! 💥 Shutting down...");
