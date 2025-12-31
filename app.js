@@ -17,12 +17,12 @@ const userRouter= require('./routes/userRouter')
 const app = express();
 
 // 🔹 Security Middleware
-// app.use(cors());
+ app.use(cors());
 // Access-Control-Allow-Origin *
 // api.natours.com, front-end natours.com
- app.use(cors({
-   origin: 'https://fluxstore-eight.vercel.app/'
- }))
+// app.use(cors({
+  // origin: 'https://fluxstore-eight.vercel.app/'
+// }))
 
 app.options('*', cors());
 // app.options('/api/v1/tours/:id', cors());
