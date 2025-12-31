@@ -1,3 +1,4 @@
+const connectDB = require("../db");
 const { promisify } = require('util');
 const jwt = require('jsonwebtoken');
 const crypto = require('crypto');
@@ -40,6 +41,7 @@ const createSendToken = (user, statusCode, message, res) => {
 };
 
 exports.SignUp = catchAsync(async (req, res, next) => {
+    await connectDB();
   const newUser = await User.create(req.body);
   if (!newUser) {
     return next(new AppError(`SomeThing Error cannot sign up`, 404));
@@ -48,6 +50,7 @@ exports.SignUp = catchAsync(async (req, res, next) => {
 });
 
 exports.login = catchAsync(async (req, res, next) => {
+    await connectDB();
   const { email, password } = req.body;
 
   //1) check email && password exist,

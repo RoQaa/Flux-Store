@@ -1,3 +1,4 @@
+const connectDB = require("../db");
 const User = require('../models/userModel');
 const { catchAsync } = require(`../utils/catchAsync`);
 const { filterObj } = require(`../utils/filterObj`);
